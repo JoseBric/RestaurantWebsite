@@ -20,7 +20,7 @@
         @endif
         <div class="images row" style="clear: both;">
             @foreach ($dishes as $dish)
-            <div class="card col-md-4">
+            <div class="card dish col-md-4" dish_id="{{ $dish->id }}">
                 <img src="{{ \Storage::disk("s3")->url($dish->image) }}" alt="" class="card-img-top mt-3" style="margin: auto; width: 90%">
                 <div class="card-body">
                     <div class="card-header">
@@ -34,11 +34,7 @@
                         <p>{{ $dish->description }}</p>
                     </div>
                     <div class="text-center">
-                        <form style="display: inline" action="{{ action('AdminPagesController@destroy', [$dish->id]) }}" method="post">
-                            @csrf    
-                            @method("delete")
-                            <input type="submit" class="mr-1 btn btn-danger btn-lg" id="" value="Delete">
-                        </form>
+                        <button class="mr-1 btn btn-danger btn-lg deleteBtn">Delete</button>
                         <a class="btn btn-primary ml-1 btn-lg" href="/admin/{{ $dish->id }}/edit">Update</a>
                     </div>
                 </div>

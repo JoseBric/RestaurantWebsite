@@ -48,10 +48,11 @@ if(page == "home") {
 }
 
 else if(page == "admin") {
-    content = ""
-    tags = $(".tags")
+    //Jquery
+    let content = ""
+    const tags = $(".tags")
     tags.hover(function(){
-        _this = $(this)
+        const _this = $(this)
         _this.addClass("delete")
         content = _this.text()
         _this.text("Delete")
@@ -61,14 +62,28 @@ else if(page == "admin") {
     })
 
     tags.click(function(){
-        _this = $(this)
-        id = $(this).attr("category_id")
+        const _this = $(this)
+        const id = $(this).attr("category_id")
         $.ajax({
             method: "DELETE",
             url: "http://project3.josebric.com/api/category/" + id,
             dataType: "json"
         }).done(function(data){
             $(`.tags[category_id="${id}"]`).hide()
+        })
+    })
+    //Vanilla
+    const deleteBtn = document.querySelectorAll(".deleteBtn")
+    deleteBtn.forEach(el=>{
+        el.addEventListener("click", ()=>{
+            const dish = el.closest(".dish")
+            const dishId = dish.getAttribute("dish_id")
+            fetch(`http://project3.josebric.com/api/dish/${dishId}`, {
+                method: "DELETE"
+            })
+            .then(()=>{
+                dish.style.cssText = "display: none";
+            })
         })
     })
 }

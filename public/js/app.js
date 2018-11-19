@@ -13935,10 +13935,11 @@ if (page == "home") {
         if (navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black");else navbar.removeClass("navbar-black");
     });
 } else if (page == "admin") {
-    content = "";
-    tags = $(".tags");
+    //Jquery
+    var content = "";
+    var tags = $(".tags");
     tags.hover(function () {
-        _this = $(this);
+        var _this = $(this);
         _this.addClass("delete");
         content = _this.text();
         _this.text("Delete");
@@ -13947,14 +13948,27 @@ if (page == "home") {
     });
 
     tags.click(function () {
-        _this = $(this);
-        id = $(this).attr("category_id");
+        var _this = $(this);
+        var id = $(this).attr("category_id");
         $.ajax({
             method: "DELETE",
             url: "http://project3.josebric.com/api/category/" + id,
             dataType: "json"
         }).done(function (data) {
             $('.tags[category_id="' + id + '"]').hide();
+        });
+    });
+    //Vanilla
+    var deleteBtn = document.querySelectorAll(".deleteBtn");
+    deleteBtn.forEach(function (el) {
+        el.addEventListener("click", function () {
+            var dish = el.closest(".dish");
+            var dishId = dish.getAttribute("dish_id");
+            fetch('http://project3.josebric.com/api/dish/' + dishId, {
+                method: "DELETE"
+            }).then(function () {
+                dish.style.cssText = "display: none";
+            });
         });
     });
 }

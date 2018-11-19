@@ -41,7 +41,7 @@ class CategoriesController extends Controller
         Category::create([
             "category_name" => $name,
         ]);
-        return back()->with("success", "Successfully created category $name");
+        return back();
     }
 
     public function edit($id)
