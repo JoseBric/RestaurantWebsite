@@ -13926,21 +13926,38 @@ var app = new Vue({
 });
 
 //Custom
+page = document.querySelector("body").id;
+if (page == "home") {
+    $(window).scroll(function () {
+        var navbar = $("#navbar");
+        var navbarPos = navbar.offset().top;
+        var featured = $("#popular").offset().top;
+        if (navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black");else navbar.removeClass("navbar-black");
+    });
+} else if (page == "admin") {
+    content = "";
+    tags = $(".tags");
+    tags.hover(function () {
+        _this = $(this);
+        _this.addClass("delete");
+        content = _this.text();
+        _this.text("Delete");
+    }, function () {
+        $(this).removeClass("delete").text(content);
+    });
 
-document.querySelectorAll("#btn").forEach(function (val) {
-    var id = val.id;
-    val.addEventListener("click", function (e) {
-        fetch('http://project3.josebric.com/api/', {
-            method: 'get'
-        }).then(function (res) {
-            return res.json();
-        }).then(function (json) {
-            return console.log(json);
-        }).catch(function (err) {
-            return console.log(err);
+    tags.click(function () {
+        _this = $(this);
+        id = $(this).attr("category_id");
+        $.ajax({
+            method: "DELETE",
+            url: "http://project3.josebric.com/api/category/" + id,
+            dataType: "json"
+        }).done(function (data) {
+            $('.tags[category_id="' + id + '"]').hide();
         });
     });
-});
+}
 
 /***/ }),
 /* 13 */
@@ -13956,10 +13973,10 @@ window._ = __webpack_require__(14);
  */
 
 try {
-    window.Popper = __webpack_require__(3).default;
-    window.$ = window.jQuery = __webpack_require__(4);
+  window.Popper = __webpack_require__(3).default;
+  window.$ = window.jQuery = __webpack_require__(4);
 
-    __webpack_require__(16);
+  __webpack_require__(16);
 } catch (e) {}
 
 /**
@@ -13981,19 +13998,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
-
-///////////////////////
-
-$(window).scroll(function () {
-    var navbar = $("#navbar");
-    var navbarPos = navbar.offset().top;
-    var featured = $("#popular").offset().top;
-    if (navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black");else navbar.removeClass("navbar-black");
-});
 
 /***/ }),
 /* 14 */

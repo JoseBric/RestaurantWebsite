@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dish;
+use App\Category;
 use Storage;
 // use App\Http\Requests\DishRequest;
 
@@ -12,7 +13,12 @@ class AdminPagesController extends Controller
     public function index()
     {
         $dishes = Dish::all();
-        return view("admin.admin")->with("dishes", $dishes);
+        $tags = Category::all();
+        $data = [
+            "dishes" => $dishes,
+            "tags" => $tags,
+        ];
+        return view("admin.admin")->with($data);
     }
 
     public function create()

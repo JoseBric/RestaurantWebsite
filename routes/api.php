@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource("dish", "DishesController");
+Route::delete("category/{id}", "CategoriesController@destroy");

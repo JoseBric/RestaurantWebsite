@@ -36,15 +36,39 @@ const app = new Vue({
 });
 
 //Custom
-
-document.querySelectorAll("#btn").forEach(val=>{
-    const id = val.id
-    val.addEventListener("click", e=>{
-        fetch(`http://project3.josebric.com/api/`, {
-            method: 'get'
-        })
-        .then(res=>res.json())
-        .then(json=>console.log(json))
-        .catch(err=>console.log(err))
+page = document.querySelector("body").id
+if(page == "home") {
+    $(window).scroll(function(){
+        const navbar = $("#navbar")
+        const navbarPos = navbar.offset().top
+        const featured = $("#popular").offset().top
+        if(navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black")
+        else navbar.removeClass("navbar-black")
     })
-})
+}
+
+else if(page == "admin") {
+    content = ""
+    tags = $(".tags")
+    tags.hover(function(){
+        _this = $(this)
+        _this.addClass("delete")
+        content = _this.text()
+        _this.text("Delete")
+    
+    }, function() {
+        $(this).removeClass("delete").text(content)
+    })
+
+    tags.click(function(){
+        _this = $(this)
+        id = $(this).attr("category_id")
+        $.ajax({
+            method: "DELETE",
+            url: "http://project3.josebric.com/api/category/" + id,
+            dataType: "json"
+        }).done(function(data){
+            $(`.tags[category_id="${id}"]`).hide()
+        })
+    })
+}

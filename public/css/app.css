@@ -10690,3 +10690,14 @@ body#admin .description p {
   font-family: "Nunito", "Arial";
 }
 
+body#admin .tags {
+  -webkit-transition: 0.5s ease-out all;
+  transition: 0.5s ease-out all;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+body#admin .tags.delete {
+  background: #e3342f;
+}
+

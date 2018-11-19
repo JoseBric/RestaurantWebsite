@@ -8,8 +8,17 @@
             Admin Dashboard
         </h1>
         <br>
-        <a class="btn btn-secondary add-dish btn-lg" href="/admin/create">Add A Dish</a>
-        <div class="images row">
+        <a class="btn btn-secondary add-dish btn-lg float-left mr-3 mb-5" href="/admin/create">Add A Dish</a>
+        <form class="form-inline float-left" action="/admin/category" method="POST">
+            @csrf
+            <input class="form-control" type="text" name="category_name" id="name" class="form-control">
+        </form>
+        @if (isset($tags))
+            @foreach ($tags as $tag)
+                <span class="badge badge-secondary tags" category_id="{{ $tag->id }}" style="cursor: pointer; margin: 5px 0 5px 10px; font-family: Nunito; font-size: 1rem;">{{ $tag->category_name }}</span>
+            @endforeach
+        @endif
+        <div class="images row" style="clear: both;">
             @foreach ($dishes as $dish)
             <div class="card col-md-4">
                 <img src="{{ \Storage::disk("s3")->url($dish->image) }}" alt="" class="card-img-top mt-3" style="margin: auto; width: 90%">
@@ -37,4 +46,8 @@
             @endforeach
         </div>
     </div>
+@endsection
+@section("script")
+<script>
+</script>
 @endsection

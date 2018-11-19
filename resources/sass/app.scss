@@ -190,6 +190,12 @@ body#admin {
   h1, .add-dish, .description p {
     font-family: "Nunito", "Arial";
   }
-  
+  .tags {
+    @include easeOut;
+    backface-visibility: hidden;
+    &.delete {
+      background: #e3342f;
+    }
+  }
 }
 

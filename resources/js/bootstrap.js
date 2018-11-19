@@ -38,12 +38,3 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-///////////////////////
-
-$(window).scroll(function(){
-    const navbar = $("#navbar")
-    const navbarPos = navbar.offset().top
-    const featured = $("#popular").offset().top
-    if(navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black")
-    else navbar.removeClass("navbar-black")
-})
