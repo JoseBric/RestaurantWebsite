@@ -34,3 +34,17 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+//Custom
+
+document.querySelectorAll("#btn").forEach(val=>{
+    const id = val.id
+    val.addEventListener("click", e=>{
+        fetch(`http://project3.josebric.com/api/`, {
+            method: 'get'
+        })
+        .then(res=>res.json())
+        .then(json=>console.log(json))
+        .catch(err=>console.log(err))
+    })
+})

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Dish;
 
 class PagesController extends Controller
 {
@@ -15,7 +16,7 @@ class PagesController extends Controller
     public function about_us(){
         return view("about_us");
     }
-    public function schedules(){
-        return view("schedules");
+    public function schedule(){
+        return view("schedule");
     }
 }
