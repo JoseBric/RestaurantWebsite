@@ -50,40 +50,51 @@ if(page == "home") {
 else if(page == "dish_create" || page == "dish_edit") {
     //Jquery
     const tagDelete = $(".tags")
-    tagDelete.click(function(){
-        const _this = $(this)
-        if(!_this.hasClass("delete")){
-            if(_this.children(".selectTag").prop("checked")) _this.addClass("added")
-            else _this.removeClass("added")
-        }
-    })
-
+    checkTag()
+    
     $("#delete-tags").click(function(e){
         if(e.target.checked) {
-            tagDelete.addClass("delete").click(function(){
-                const id = $(this).attr("category_id")
-                const _this = this
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                })
-                $.ajax({
-                    method: "DELETE",
-                    url: `http://project3.josebric.com/dish/category/${id}`,
-                    success: function(response){
-                        $(_this).hide()
-                        console.log(response)
-                    },
-                    error: function(err){
-                        console.log(err)
-                    }
-                })
-            })
+            tagDelete.unbind()
+            deleteTag()
         } else {
+            tagDelete.unbind()
+            checkTag()
             tagDelete.removeClass("delete")
         }
     })
+
+    function checkTag(){
+        tagDelete.click(function(){
+            const _this = $(this)
+            if(!_this.hasClass("delete")){
+                if(_this.children(".selectTag").prop("checked")) _this.addClass("added")
+                else _this.removeClass("added")
+            }
+        })
+    }
+    function deleteTag(){
+        tagDelete.addClass("delete").click(function(){
+            const id = $(this).attr("category_id")
+            const _this = this
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+            $.ajax({
+                method: "DELETE",
+                url: `http://project3.josebric.com/dish/category/${id}`,
+                success: function(response){
+                    $(_this).hide()
+                    console.log(response)
+                },
+                error: function(err){
+                    console.log(err)
+                }
+            })
+        })
+    }
+
 }
 else if(page == "dashboard") {
     $(".deleteBtn").click(el=>{

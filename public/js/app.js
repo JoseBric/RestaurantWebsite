@@ -13935,38 +13935,49 @@ if (page == "home") {
         if (navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black");else navbar.removeClass("navbar-black");
     });
 } else if (page == "dish_create" || page == "dish_edit") {
+    var checkTag = function checkTag() {
+        tagDelete.click(function () {
+            var _this = $(this);
+            if (!_this.hasClass("delete")) {
+                if (_this.children(".selectTag").prop("checked")) _this.addClass("added");else _this.removeClass("added");
+            }
+        });
+    };
+
+    var deleteTag = function deleteTag() {
+        tagDelete.addClass("delete").click(function () {
+            var id = $(this).attr("category_id");
+            var _this = this;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: "DELETE",
+                url: 'http://project3.josebric.com/dish/category/' + id,
+                success: function success(response) {
+                    $(_this).hide();
+                    console.log(response);
+                },
+                error: function error(err) {
+                    console.log(err);
+                }
+            });
+        });
+    };
+
     //Jquery
     var tagDelete = $(".tags");
-    tagDelete.click(function () {
-        var _this = $(this);
-        if (!_this.hasClass("delete")) {
-            if (_this.children(".selectTag").prop("checked")) _this.addClass("added");else _this.removeClass("added");
-        }
-    });
+    checkTag();
 
     $("#delete-tags").click(function (e) {
         if (e.target.checked) {
-            tagDelete.addClass("delete").click(function () {
-                var id = $(this).attr("category_id");
-                var _this = this;
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    method: "DELETE",
-                    url: 'http://project3.josebric.com/dish/category/' + id,
-                    success: function success(response) {
-                        $(_this).hide();
-                        console.log(response);
-                    },
-                    error: function error(err) {
-                        console.log(err);
-                    }
-                });
-            });
+            tagDelete.unbind();
+            deleteTag();
         } else {
+            tagDelete.unbind();
+            checkTag();
             tagDelete.removeClass("delete");
         }
     });
