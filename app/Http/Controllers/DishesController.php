@@ -12,8 +12,13 @@ class DishesController extends Controller
 {
     public function index()
     {
+        $tags = Category::all();
         $dishes = Dish::orderBy("created_at", "desc")->paginate(9);
-        return view("dish.dashboard")->with("dishes", $dishes);
+        $data = [
+            "tags" => $tags,
+            "dishes" => $dishes,
+        ];
+        return view("dish.dashboard")->with($data);
     }
 
     public function create()

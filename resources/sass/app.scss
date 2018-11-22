@@ -112,6 +112,10 @@ body {
       }
     }
   }
+
+  .btn, label, input, p {
+    font-family: "Nutino"
+  }
 } 
 
 body#home {
@@ -192,7 +196,7 @@ body#dashboard {
   }
 }
 
-body#dish_create, body#dish_edit {
+body#dish_create, body#dish_edit, body#dashboard {
   .tags {
     cursor: pointer;
     margin: 6px 3px 5px 0; 

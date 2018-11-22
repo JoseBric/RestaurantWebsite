@@ -10595,6 +10595,13 @@ body footer a:hover {
   color: black;
 }
 
+body .btn,
+body label,
+body input,
+body p {
+  font-family: "Nutino";
+}
+
 body#home {
   background: url("/img/woodbg.jpeg");
   background-attachment: fixed;
@@ -10691,7 +10698,8 @@ body#dashboard .description p {
 }
 
 body#dish_create .tags,
-body#dish_edit .tags {
+body#dish_edit .tags,
+body#dashboard .tags {
   cursor: pointer;
   margin: 6px 3px 5px 0;
   font-family: "Nunito";
@@ -10701,32 +10709,38 @@ body#dish_edit .tags {
 }
 
 body#dish_create .tags span::-moz-selection,
-body#dish_edit .tags span::-moz-selection {
+body#dish_edit .tags span::-moz-selection,
+body#dashboard .tags span::-moz-selection {
   background: rgba(0, 0, 0, 0);
 }
 
 body#dish_create .tags span::selection,
-body#dish_edit .tags span::selection {
+body#dish_edit .tags span::selection,
+body#dashboard .tags span::selection {
   background: rgba(0, 0, 0, 0);
 }
 
 body#dish_create .tags input,
-body#dish_edit .tags input {
+body#dish_edit .tags input,
+body#dashboard .tags input {
   display: none;
 }
 
 body#dish_create .tags:hover,
-body#dish_edit .tags:hover {
+body#dish_edit .tags:hover,
+body#dashboard .tags:hover {
   background: #363636;
 }
 
 body#dish_create .tags.added,
-body#dish_edit .tags.added {
+body#dish_edit .tags.added,
+body#dashboard .tags.added {
   background: #2789da;
 }
 
 body#dish_create .tags.delete,
-body#dish_edit .tags.delete {
+body#dish_edit .tags.delete,
+body#dashboard .tags.delete {
   background: #e3342f;
 }
 

@@ -18,6 +18,12 @@ class CategoriesController extends Controller
     {
     }
 
+    public function show(Category $category)
+    {
+        $dishes = $category->dishes;
+        return view("dish.category")->with("dishes", $dishes);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

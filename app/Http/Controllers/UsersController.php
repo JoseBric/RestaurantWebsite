@@ -24,5 +24,6 @@ class UsersController extends Controller
         $user->name = isset($name) ? $name : $user->name;
         $user->password = isset($password) ? Hash::make($password) : $user->password;
         $user->save();
+        return back();
     }
 }

@@ -6,9 +6,11 @@
         @include("messages.errors")
         <a href="/dish" class="btn btn-secondary">Back</a>
         <h1>Update a dish</h1>
-        <form class="form-inline float-left" id="form_dish" action="/dish/category" method="POST">
+        <form class="form-inline float-left row col-md-12" id="form_dish" action="/dish/category" method="POST">
             @csrf
-            <input class="form-control" type="text" name="category_name" id="name" class="form-control">
+            <input class="form-control" type="text" placeholder="New food category" name="category_name" id="name" class="form-control">
+            <input type="checkbox" class="ml-3 mr-2" id="delete-tags">
+            <label for="delete-tags"><span class="text-muted">Delete Categories</span></label>
         </form>
         <form action="{{ route('dish.update', $dish->id) }}" enctype="multipart/form-data" method="post">
             @csrf
@@ -16,7 +18,6 @@
             @if (isset($tags))
             <div class="form-group">
                 <div class="tags_container">
-                    <input type="checkbox" class="ml-3 mr-2" id="delete-tags">
                     @foreach ($tags as $tag)
                     @if(in_array($tag->id, $categories_id))
                     <label class="badge badge-secondary tags added" category_id="{{ $tag->id }}" for="{{ $tag->id }}">

@@ -8,31 +8,23 @@
             Dishes Dashboard
         </h1>
         <br>
-        <a class="btn btn-secondary add-dish btn-lg mr-3 mb-5" href="/dish/create">Add A Dish</a>
-        <div class="images row">
-            @foreach ($dishes as $dish)
-            <div class="card dish col-md-4" dish_id="{{ $dish->id }}">
-                <img src="{{ \Storage::disk("s3")->url($dish->image) }}" alt="" class="card-img-top mt-3" style="margin: auto; width: 90%">
-                <div class="card-body">
-                    <div class="card-header">
-                        <div class="card-title text-center text-capitalize">
-                            <h2>{{ $dish->name }}</h2>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="card-text text-center description">
-                        <h4 class="card-subtitle mb-2 text-muted">Ingredients:</h4>
-                        <p>{{ $dish->description }}</p>
-                    </div>
-                    <div class="text-center">
-                        <button class="mr-1 btn btn-danger btn-lg deleteBtn">Delete</button>
-                        <a class="btn btn-primary ml-1 btn-lg" href="/dish/{{ $dish->id }}/edit">Update</a>
-                    </div>
-                </div>
+        <div class="row">
+            <a class="btn btn-secondary add-dish btn-lg mr-3 mb-5" href="/dish/create">Add A Dish</a>
+            <div class="tags-container">
+                @if (isset($tags))
+                    @foreach ($tags as $tag)
+                    @if(!empty($tag->dishes[0]))
+                        <a href="/dish/category/{{ $tag->id }}" class="mt-2 tags badge badge-secondary"><span>{{ $tag->category_name }}</span></a>
+                    @endif
+                    @endforeach
+                @endif
             </div>
-            @endforeach
         </div>
-        <br>
+            <div class="images row">
+                @foreach ($dishes as $dish)
+                    @include("incs.dish")
+                @endforeach
+            </div>
         {{ $dishes->links() }}
     </div>
 @endsection

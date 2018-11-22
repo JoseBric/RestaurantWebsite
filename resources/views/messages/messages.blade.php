@@ -1,23 +1,23 @@
 @if(session()->has("success"))
     <div class="alert alert-success">
-        <h3>
+        <p>
             {{ session("success") }}
-        </h3>
+        </p>
     </div>
 @endif
 
 @if(session()->has("warning"))
     <div class="alert alert-warning">
-        <h3>
+        <p>
             {{ session("warning") }}
-        </h3>
+        </p>
     </div>
 @endif
 
 @if(session()->has("danger"))
     <div class="alert alert-danger">
-        <h3>
+        <p>
             {{ session("danger") }}
-        </h3>
+        </p>
     </div>
 @endif
