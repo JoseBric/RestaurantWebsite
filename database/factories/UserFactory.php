@@ -22,3 +22,14 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Dish::class, function (Faker $faker) {
+    return [
+        "user_id" => 1,
+        "image" => "menu/2TPGj4tCAdd6NjDQgdYzKUfgOhSll15Lu2iL5PL4.png",
+        "description" => str_random(30),
+        "name" => str_random(15),
+    ];
+});
+
+

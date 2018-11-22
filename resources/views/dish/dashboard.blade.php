@@ -1,24 +1,15 @@
 @extends("layouts.app")
-@section("id", "admin")
+@section("id", "dashboard")
 @section("content")
     <div class="container">
         @include('messages.messages')
         @include("messages.errors")
         <h1>
-            Admin Dashboard
+            Dishes Dashboard
         </h1>
         <br>
-        <a class="btn btn-secondary add-dish btn-lg float-left mr-3 mb-5" href="/admin/create">Add A Dish</a>
-        <form class="form-inline float-left" action="/admin/category" method="POST">
-            @csrf
-            <input class="form-control" type="text" name="category_name" id="name" class="form-control">
-        </form>
-        @if (isset($tags))
-            @foreach ($tags as $tag)
-                <span class="badge badge-secondary tags" category_id="{{ $tag->id }}" style="cursor: pointer; margin: 5px 0 5px 10px; font-family: Nunito; font-size: 1rem;">{{ $tag->category_name }}</span>
-            @endforeach
-        @endif
-        <div class="images row" style="clear: both;">
+        <a class="btn btn-secondary add-dish btn-lg mr-3 mb-5" href="/dish/create">Add A Dish</a>
+        <div class="images row">
             @foreach ($dishes as $dish)
             <div class="card dish col-md-4" dish_id="{{ $dish->id }}">
                 <img src="{{ \Storage::disk("s3")->url($dish->image) }}" alt="" class="card-img-top mt-3" style="margin: auto; width: 90%">
@@ -35,12 +26,14 @@
                     </div>
                     <div class="text-center">
                         <button class="mr-1 btn btn-danger btn-lg deleteBtn">Delete</button>
-                        <a class="btn btn-primary ml-1 btn-lg" href="/admin/{{ $dish->id }}/edit">Update</a>
+                        <a class="btn btn-primary ml-1 btn-lg" href="/dish/{{ $dish->id }}/edit">Update</a>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
+        <br>
+        {{ $dishes->links() }}
     </div>
 @endsection
 @section("script")

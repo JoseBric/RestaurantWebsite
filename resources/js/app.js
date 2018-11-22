@@ -47,43 +47,63 @@ if(page == "home") {
     })
 }
 
-else if(page == "admin") {
+else if(page == "dish_create" || page == "dish_edit") {
     //Jquery
-    let content = ""
-    const tags = $(".tags")
-    tags.hover(function(){
+    const tagDelete = $(".tags")
+    tagDelete.click(function(){
         const _this = $(this)
-        _this.addClass("delete")
-        content = _this.text()
-        _this.text("Delete")
-    
-    }, function() {
-        $(this).removeClass("delete").text(content)
+        if(!_this.hasClass("delete")){
+            if(_this.children(".selectTag").prop("checked")) _this.addClass("added")
+            else _this.removeClass("added")
+        }
     })
 
-    tags.click(function(){
-        const _this = $(this)
-        const id = $(this).attr("category_id")
+    $("#delete-tags").click(function(e){
+        if(e.target.checked) {
+            tagDelete.addClass("delete").click(function(){
+                const id = $(this).attr("category_id")
+                const _this = this
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+                $.ajax({
+                    method: "DELETE",
+                    url: `http://project3.josebric.com/dish/category/${id}`,
+                    success: function(response){
+                        $(_this).hide()
+                        console.log(response)
+                    },
+                    error: function(err){
+                        console.log(err)
+                    }
+                })
+            })
+        } else {
+            tagDelete.removeClass("delete")
+        }
+    })
+}
+else if(page == "dashboard") {
+    $(".deleteBtn").click(el=>{
+        const dish = el.target.closest(".dish")
+        const id = dish.getAttribute("dish_id")
+        dish.style.display = "none"
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
         $.ajax({
             method: "DELETE",
-            url: "http://project3.josebric.com/api/category/" + id,
-            dataType: "json"
-        }).done(function(data){
-            $(`.tags[category_id="${id}"]`).hide()
-        })
-    })
-    //Vanilla
-    const deleteBtn = document.querySelectorAll(".deleteBtn")
-    deleteBtn.forEach(el=>{
-        el.addEventListener("click", ()=>{
-            const dish = el.closest(".dish")
-            const dishId = dish.getAttribute("dish_id")
-            fetch(`http://project3.josebric.com/api/dish/${dishId}`, {
-                method: "DELETE"
-            })
-            .then(()=>{
-                dish.style.cssText = "display: none";
-            })
+            url: `http://project3.josebric.com/dish/${id}`,
+            dataType: "json",
+            success: function(data) {
+                console.log(data)
+            }
         })
     })
 }
+

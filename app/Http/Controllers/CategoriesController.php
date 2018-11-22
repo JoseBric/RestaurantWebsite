@@ -13,6 +13,7 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
     }
@@ -70,7 +71,9 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+        if(!empty($category->dishes)) $category->dishes()->detach();
         $category->delete();
         return new CategoryResource($category);
+        // return $category->dishes;
     }
 }

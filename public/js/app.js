@@ -13934,41 +13934,60 @@ if (page == "home") {
         var featured = $("#popular").offset().top;
         if (navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black");else navbar.removeClass("navbar-black");
     });
-} else if (page == "admin") {
+} else if (page == "dish_create" || page == "dish_edit") {
     //Jquery
-    var content = "";
-    var tags = $(".tags");
-    tags.hover(function () {
+    var tagDelete = $(".tags");
+    tagDelete.click(function () {
         var _this = $(this);
-        _this.addClass("delete");
-        content = _this.text();
-        _this.text("Delete");
-    }, function () {
-        $(this).removeClass("delete").text(content);
+        if (!_this.hasClass("delete")) {
+            if (_this.children(".selectTag").prop("checked")) _this.addClass("added");else _this.removeClass("added");
+        }
     });
 
-    tags.click(function () {
-        var _this = $(this);
-        var id = $(this).attr("category_id");
+    $("#delete-tags").click(function (e) {
+        if (e.target.checked) {
+            tagDelete.addClass("delete").click(function () {
+                var id = $(this).attr("category_id");
+                var _this = this;
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: "DELETE",
+                    url: 'http://project3.josebric.com/dish/category/' + id,
+                    success: function success(response) {
+                        $(_this).hide();
+                        console.log(response);
+                    },
+                    error: function error(err) {
+                        console.log(err);
+                    }
+                });
+            });
+        } else {
+            tagDelete.removeClass("delete");
+        }
+    });
+} else if (page == "dashboard") {
+    $(".deleteBtn").click(function (el) {
+        var dish = el.target.closest(".dish");
+        var id = dish.getAttribute("dish_id");
+        dish.style.display = "none";
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
             method: "DELETE",
-            url: "http://project3.josebric.com/api/category/" + id,
-            dataType: "json"
-        }).done(function (data) {
-            $('.tags[category_id="' + id + '"]').hide();
-        });
-    });
-    //Vanilla
-    var deleteBtn = document.querySelectorAll(".deleteBtn");
-    deleteBtn.forEach(function (el) {
-        el.addEventListener("click", function () {
-            var dish = el.closest(".dish");
-            var dishId = dish.getAttribute("dish_id");
-            fetch('http://project3.josebric.com/api/dish/' + dishId, {
-                method: "DELETE"
-            }).then(function () {
-                dish.style.cssText = "display: none";
-            });
+            url: 'http://project3.josebric.com/dish/' + id,
+            dataType: "json",
+            success: function success(data) {
+                console.log(data);
+            }
         });
     });
 }

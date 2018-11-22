@@ -57,7 +57,7 @@
                                             </a>
                                             
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item text-dark" href="/admin">
+                                                <a class="dropdown-item text-dark" href="/dish">
                                                     Dashboard
                                                 </a>
                                                 <a class="dropdown-item text-dark" href="/user/{{ Auth::user()->id }}/">

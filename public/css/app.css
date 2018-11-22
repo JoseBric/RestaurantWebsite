@@ -10684,20 +10684,49 @@ body#home #popular .dish img {
   height: 550px;
 }
 
-body#admin h1,
-body#admin .add-dish,
-body#admin .description p {
+body#dashboard h1,
+body#dashboard .add-dish,
+body#dashboard .description p {
   font-family: "Nunito", "Arial";
 }
 
-body#admin .tags {
+body#dish_create .tags,
+body#dish_edit .tags {
+  cursor: pointer;
+  margin: 6px 3px 5px 0;
+  font-family: "Nunito";
+  font-size: 1rem;
   -webkit-transition: 0.5s ease-out all;
   transition: 0.5s ease-out all;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
 }
 
-body#admin .tags.delete {
+body#dish_create .tags span::-moz-selection,
+body#dish_edit .tags span::-moz-selection {
+  background: rgba(0, 0, 0, 0);
+}
+
+body#dish_create .tags span::selection,
+body#dish_edit .tags span::selection {
+  background: rgba(0, 0, 0, 0);
+}
+
+body#dish_create .tags input,
+body#dish_edit .tags input {
+  display: none;
+}
+
+body#dish_create .tags:hover,
+body#dish_edit .tags:hover {
+  background: #363636;
+}
+
+body#dish_create .tags.added,
+body#dish_edit .tags.added {
+  background: #2789da;
+}
+
+body#dish_create .tags.delete,
+body#dish_edit .tags.delete {
   background: #e3342f;
 }
 

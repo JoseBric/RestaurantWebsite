@@ -16,13 +16,13 @@ class UsersController extends Controller
     }
     public function updateSettings(Request $request, User $user) {
         $request->validate([
-            "password" => "max:50|confirmed|min:6",
-            "name" => "max:50|min:3",
+            "password" => "max:50|confirmed|min:6|nullable",
+            "name" => "max:50|min:3|nullable",
         ]);
-        User::find($user->id)->update([
-            "password" => Hash::make($request->input("password")),
-            "name" => $request->input("name"),
-        ]);
-        return back()->with("success", "Your settings have been updated!");
+        $name = $request->input("name");
+        $password = $request->input("password");
+        $user->name = isset($name) ? $name : $user->name;
+        $user->password = isset($password) ? Hash::make($password) : $user->password;
+        $user->save();
     }
 }

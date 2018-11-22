@@ -9,10 +9,10 @@ class Dish extends Model
     protected $guarded = [];
 
     public function User(){
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function Categories(){
-        $this->hasMany(Category::class);
+    public function categories(){
+        return $this->belongsToMany(Category::class, "categories_dishes", "dish_id", "category_id");
     }
 }

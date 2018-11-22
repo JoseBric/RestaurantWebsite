@@ -186,15 +186,34 @@ body#home {
   }
 } 
 
-body#admin {
+body#dashboard {
   h1, .add-dish, .description p {
     font-family: "Nunito", "Arial";
   }
+}
+
+body#dish_create, body#dish_edit {
   .tags {
+    cursor: pointer;
+    margin: 6px 3px 5px 0; 
+    font-family: "Nunito"; 
+    font-size: 1rem;
     @include easeOut;
-    backface-visibility: hidden;
+    span::selection {
+      background: rgba(#000, 0);
+    }
+    input {
+      display: none;
+    }
+    &:hover{
+      background: rgb(54, 54, 54);
+    }
+    &.added {
+      background: darken($blue, 3);
+    }
+    
     &.delete {
-      background: #e3342f;
+      background: $red;
     }
   }
 }
