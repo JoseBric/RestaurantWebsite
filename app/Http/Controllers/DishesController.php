@@ -100,10 +100,10 @@ class DishesController extends Controller
         return redirect("/dish")->with("success", "The dish has been updated");
     }
 
-    public function destroy($id)
+    public function destroy(Dish $dish)
     {
-        $dish = Dish::find($id);
         Storage::disk("s3")->delete($dish->image);
+        $dish->categories()->detach();
         $dish->delete();
     }
 }

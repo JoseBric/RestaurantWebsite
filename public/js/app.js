@@ -13998,6 +13998,9 @@ if (page == "home") {
             dataType: "json",
             success: function success(data) {
                 console.log(data);
+            },
+            error: function error(err) {
+                console.log(err);
             }
         });
     });

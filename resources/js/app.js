@@ -51,7 +51,7 @@ else if(page == "dish_create" || page == "dish_edit") {
     //Jquery
     const tagDelete = $(".tags")
     checkTag()
-    
+
     $("#delete-tags").click(function(e){
         if(e.target.checked) {
             tagDelete.unbind()
@@ -113,6 +113,9 @@ else if(page == "dashboard") {
             dataType: "json",
             success: function(data) {
                 console.log(data)
+            },
+            error: function(err){
+                console.log(err)
             }
         })
     })
