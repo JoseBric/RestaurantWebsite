@@ -39,8 +39,8 @@
                                         <li class="nav-item">
                                             <a href="/about_us" class="nav-link">About Us</a>
                                         </li>
-                                        <li class="nav-item">`
-                                            <a href="/schedule" class="nav-link">Schedule</a>
+                                        <li class="nav-item">
+                                            <a href="/schedule" class="nav-link">Locations</a>
                                         </li>
                                     </ul>
                                 </div>

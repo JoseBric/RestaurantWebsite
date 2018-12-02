@@ -13,10 +13,12 @@ class DishesController extends Controller
     public function index()
     {
         $tags = Category::all();
-        $dishes = Dish::orderBy("created_at", "desc")->paginate(9);
+        $featured = Dish::where("featured", true)->get();
+        $dishes = Dish::orderBy("created_at", "desc")->paginate(6);
         $data = [
             "tags" => $tags,
             "dishes" => $dishes,
+            "featured" => $featured,
         ];
         return view("dish.dashboard")->with($data);
     }
@@ -31,7 +33,7 @@ class DishesController extends Controller
     {
         $validator = $request->validate([
             "category" => "nullable",
-            "file" => "required",
+            "file" => "required|max:5000",
             "description" => "required|max:150|min:3",
             "name" => "required|max:25",
         ]);
@@ -77,7 +79,7 @@ class DishesController extends Controller
 
         $request->validate([
             "category" => "nullable",
-            "image" => "nullable",
+            "image" => "nullable|max:5120",
             "description" => "max:150",
             "name" => "max:25",
         ]);

@@ -10504,6 +10504,12 @@ body header #navbar-wrapper #navbar .nav-item .navlink {
   z-index: 3;
 }
 
+body header #navbar-wrapper #navbar .nav-item .nav-link:hover,
+body header #navbar-wrapper #navbar .nav-item .navlink:hover {
+  border-bottom: #fff 3px solid;
+  margin-bottom: -3px;
+}
+
 body header #navbar-wrapper #navbar .nav-item .dropdown-item {
   font-family: "Nunito";
 }
@@ -10563,6 +10569,7 @@ body header #navbar-wrapper #navbar #nav-links .right ul li {
 }
 
 body footer {
+  clear: both;
   background: #7d7e7d;
   background: -webkit-gradient(linear, left top, right top, from(#000000), to(#45484d));
   background: linear-gradient(to right, #000000 0%, #45484d 100%);
@@ -10592,7 +10599,7 @@ body footer a {
 }
 
 body footer a:hover {
-  color: black;
+  color: white;
 }
 
 body .btn,
@@ -10625,7 +10632,7 @@ body#home header #navbar-wrapper #navbar {
   z-index: 1;
 }
 
-body#home header #navbar-wrapper #navbar:after {
+body#home header #navbar-wrapper #navbar::after {
   position: absolute;
   content: '';
   top: 0;
@@ -10640,7 +10647,7 @@ body#home header #navbar-wrapper #navbar:after {
   opacity: 0;
 }
 
-body#home header #navbar-wrapper #navbar.navbar-black:after {
+body#home header #navbar-wrapper #navbar.navbar-black::after {
   opacity: 1;
 }
 
@@ -10666,7 +10673,6 @@ body#home header .landing {
 }
 
 body#home header .landing img {
-  z-index: 2;
   height: 400px;
 }
 
@@ -10679,7 +10685,15 @@ body#home header .landing h1 {
 }
 
 body#home #popular {
-  padding: 6rem 4rem;
+  background: -webkit-gradient(linear, left top, right top, from(#000000), to(#45484d));
+  background: linear-gradient(to right, #000000 0%, #45484d 100%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  width: 100vw;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body#home #popular h2 {
@@ -10687,14 +10701,51 @@ body#home #popular h2 {
   text-transform: uppercase;
 }
 
+body#home #popular .dish {
+  display: inline-block;
+}
+
+body#home #popular .dish:hover {
+  text-decoration: none;
+  outline: #fff 1px solid;
+}
+
+body#home #popular .dish h3 {
+  padding: 1rem 2rem;
+  text-align: center;
+  color: white;
+}
+
 body#home #popular .dish img {
-  height: 550px;
+  height: auto;
+  width: 100%;
 }
 
 body#dashboard h1,
 body#dashboard .add-dish,
 body#dashboard .description p {
   font-family: "Nunito", "Arial";
+}
+
+body#dashboard #featuredBox {
+  margin: 5px 5px 0 0;
+}
+
+body#dashboard .featuredBox {
+  display: none;
+}
+
+body#dashboard .featured-badge {
+  font-family: "Nunito";
+  font-size: 17px;
+  margin-right: 5px;
+  -webkit-transition: 0.5s ease-out all;
+  transition: 0.5s ease-out all;
+}
+
+body#dashboard .featured-badge:hover {
+  background: #2176bd;
+  cursor: pointer;
 }
 
 body#dish_create .tags,
@@ -10742,5 +10793,172 @@ body#dish_create .tags.delete,
 body#dish_edit .tags.delete,
 body#dashboard .tags.delete {
   background: #e3342f;
+}
+
+body#menu {
+  background: url("/img/woodbg.jpeg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+body#menu .dishes-menu {
+  display: grid;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+body#menu .dishes-menu .dish {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 50px;
+}
+
+body#menu .dishes-menu .dish:hover {
+  text-decoration: none;
+}
+
+body#menu .dishes-menu .dish:hover .img {
+  -webkit-filter: none;
+          filter: none;
+}
+
+body#menu .dishes-menu .dish:hover h3::after {
+  opacity: 1;
+}
+
+body#menu .dishes-menu .dish h3 {
+  position: relative;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  text-align: center;
+  background: -webkit-gradient(linear, left top, right top, from(#000000), to(#45484d));
+  background: linear-gradient(to right, #000000 0%, #45484d 100%);
+  padding: 10px 0;
+  margin: 0;
+  z-index: 0;
+}
+
+body#menu .dishes-menu .dish h3::after {
+  -webkit-transition: 0.5s ease-out all;
+  transition: 0.5s ease-out all;
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#ca5f5e), to(#d68584));
+  background-image: linear-gradient(to top, #ca5f5e, #d68584);
+  z-index: -1;
+  opacity: 0;
+}
+
+body#menu .dishes-menu .dish h3 span {
+  color: #fff;
+  z-index: 1;
+  overflow: hidden;
+}
+
+body#menu .dishes-menu .dish .img {
+  -webkit-transition: 0.5s ease-out all;
+  transition: 0.5s ease-out all;
+  -webkit-filter: grayscale(100%);
+  filter: gray;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body#menu_category {
+  background: url("/img/woodbg.jpeg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+body#menu_category .dishes-menu {
+  display: grid;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+body#menu_category .dishes-menu .dish {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 50px;
+}
+
+body#menu_category .dishes-menu .dish h3 {
+  position: relative;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  text-align: center;
+  background: -webkit-gradient(linear, left bottom, left top, from(#ca5f5e), to(#d68584));
+  background: linear-gradient(to top, #ca5f5e, #d68584);
+  padding: 10px 0;
+  margin: 0;
+  z-index: 0;
+}
+
+body#menu_category .dishes-menu .dish h3 span {
+  color: #fff;
+  z-index: 1;
+  overflow: hidden;
+}
+
+body#menu_category .dishes-menu .dish .img {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body#menu_category .dishes-menu .dish .ingredients {
+  background: -webkit-gradient(linear, left top, right top, from(#000000), to(#45484d));
+  background: linear-gradient(to right, #000000 0%, #45484d 100%);
+  color: white;
+  text-align: center;
+  padding: 1rem 2rem;
+}
+
+body#about_us section.about_us {
+  height: 100vh;
+  background: url("/img/about_us.jpeg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  display: grid;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body#about_us section.about_us h1 {
+  position: relative;
+  top: 200px;
+  font-size: 100px;
+  font-weight: normal;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.5)), to(rgba(69, 72, 77, 0.5)));
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(69, 72, 77, 0.5) 100%);
+  color: #fff;
+  text-align: center;
+  width: 100vw;
+}
+
+body#about_us #navbar-wrapper {
+  height: 0;
 }
 

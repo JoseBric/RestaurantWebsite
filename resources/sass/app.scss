@@ -24,6 +24,7 @@ body {
       height: 100px;
       width: 100%;
       #navbar {
+        // background-image: linear-gradient(to top, #ca5f5e, #d68584);
         background-image: linear-gradient(to right, #000000 0%,#45484d 100%);
         z-index: 1;
         padding: 0;
@@ -35,6 +36,10 @@ body {
           z-index: 3;
           .nav-link, .navlink {
             z-index: 3;
+            &:hover {
+              border-bottom: #fff 3px solid;
+              margin-bottom: -3px;
+            }
           }
           .dropdown-item {
             font-family: "Nunito";
@@ -88,6 +93,7 @@ body {
   }
 
   footer {
+    clear: both;
     background: #7d7e7d;
     background: linear-gradient(to right, #000000 0%,#45484d 100%);
     padding: 2rem 4rem;
@@ -108,7 +114,7 @@ body {
     a {
       color: white;
       &:hover {
-        color: black;
+        color: white;
       }
     }
   }
@@ -135,7 +141,7 @@ body#home {
         background: rgba(0, 0, 0, 0);
         backface-visibility: hidden;
         z-index: 1;
-        &:after {
+        &::after {
           position: absolute;
           content: '';
           top: 0;
@@ -148,7 +154,7 @@ body#home {
           z-index: 2;
           opacity: 0;
         }
-        &.navbar-black:after {
+        &.navbar-black::after {
           opacity: 1;
         }
         #nav-links a {
@@ -163,7 +169,6 @@ body#home {
       align-items: center;
       flex-direction: column;
       img {
-        z-index: 2;
         height: 400px;
       }
       h1 {
@@ -177,14 +182,29 @@ body#home {
   }
 
   #popular {
-    padding: 6rem 4rem;
+    background: linear-gradient(to right, #000000 0%,#45484d 100%);
+    display: flex;
+    padding: 0;
+    width: 100vw;
+    box-sizing: border-box;
     h2 {
       font-size: 70px;
       text-transform: uppercase;
     }
     .dish {
+      display: inline-block;
+      &:hover {
+        text-decoration: none;
+        outline: #fff 1px solid;
+      }
+      h3 {
+        padding: 1rem 2rem;
+        text-align: center;
+        color: white;
+      }
       img {
-        height: 550px;
+        height: auto;
+        width: 100%;
       }
     }
   }
@@ -193,6 +213,25 @@ body#home {
 body#dashboard {
   h1, .add-dish, .description p {
     font-family: "Nunito", "Arial";
+  }
+
+  #featuredBox {
+    margin: 5px 5px 0 0;
+  }
+
+  .featuredBox {
+    display: none;
+  }
+
+  .featured-badge {
+    font-family: "Nunito";
+    font-size: 17px;
+    margin-right: 5px;
+    @include easeOut;
+    &:hover {
+      background: darken($blue, 10);
+      cursor: pointer;
+    }
   }
 }
 
@@ -222,3 +261,142 @@ body#dish_create, body#dish_edit, body#dashboard {
   }
 }
 
+body#menu {
+  background: url("/img/woodbg.jpeg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  // background-size: cover;
+  .dishes-menu {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    .dish {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 50px;
+      &:hover {
+        text-decoration: none;
+        .img {
+          filter: none;
+        }
+        h3 {
+          &::after {
+            opacity: 1;
+          }
+        }
+      }
+      h3 {
+        position: relative;
+        backface-visibility: hidden;
+        text-align: center;
+        background: linear-gradient(to right, #000000 0%,#45484d 100%);
+        padding: 10px 0;
+        margin: 0;
+        z-index: 0;
+        &::after {
+          @include easeOut;
+          position: absolute;
+          content: '';
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: linear-gradient(to top, #ca5f5e, #d68584);
+          z-index: -1;
+          opacity: 0;
+        }
+        span {
+          color: #fff;
+          z-index: 1;
+          overflow: hidden;
+        }
+      }
+      .img {
+        @include easeOut;
+        -webkit-filter: grayscale(100%);
+        filter: gray;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}
+
+
+body#menu_category {
+  background: url("/img/woodbg.jpeg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  .dishes-menu {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    .dish {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 50px;
+      h3 {
+        position: relative;
+        backface-visibility: hidden;
+        text-align: center;
+        background: linear-gradient(to top, #ca5f5e, #d68584);
+        padding: 10px 0;
+        margin: 0;
+        z-index: 0;
+        span {
+          color: #fff;
+          z-index: 1;
+          overflow: hidden;
+        }
+      }
+      .img {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .ingredients {
+        background: linear-gradient(to right, #000000 0%,#45484d 100%);
+        color: white;
+        text-align: center;
+        padding: 1rem 2rem;
+      }
+    }
+  }
+}
+
+body#about_us {
+  section.about_us {
+    height: 100vh;
+    background: url("/img/about_us.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    h1 {
+      position: relative;
+      top: 200px;
+      font-size: 100px;
+      font-weight: normal;
+      background: linear-gradient(to right, rgba(#000000, 0.5) 0%,rgba(#45484d, 0.5) 100%);
+      color: #fff;
+      text-align: center;
+      width: 100vw;
+    }
+  }
+  #navbar-wrapper {
+    height: 0;
+  }
+}

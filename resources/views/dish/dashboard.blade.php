@@ -9,7 +9,7 @@
         </h1>
         <br>
         <div class="row">
-            <a class="btn btn-secondary add-dish btn-lg mr-3 mb-5" href="/dish/create">Add A Dish</a>
+            <a class="btn btn-secondary add-dish btn-lg mr-3 mb-3" href="/dish/create">Add A Dish</a>
             <div class="tags-container">
                 @if (isset($tags))
                     @foreach ($tags as $tag)
@@ -19,10 +19,23 @@
                     @endforeach
                 @endif
             </div>
+            @if($featured)
+            <div class="featured-dishes col-md-12 row mb-4">
+                <input type="checkbox" id="featuredBox">
+                @foreach ($featured as $dish)
+                <span class="badge badge-primary featured-badge">{{ $dish->name }}</span>
+                @endforeach
+            </div>
+            @endif
+        </div>
         </div>
             <div class="images row">
                 @foreach ($dishes as $dish)
+                    @if ($dish->featured)
+                    @include("incs.featuredDish")
+                    @else
                     @include("incs.dish")
+                    @endif
                 @endforeach
             </div>
         {{ $dishes->links() }}

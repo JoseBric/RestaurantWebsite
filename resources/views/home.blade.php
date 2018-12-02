@@ -8,23 +8,12 @@
 @endsection
 @section('content')
     <section id="popular">
-        <h2>Popular Dishes</h2>
-        <div class="dish">
-            <h3>Pizza</h3>
-            <img src="{{ asset('img/menu/pizza.jpeg') }}" alt="">
-        </div>
-        <div class="dish">
-            <h3>Lasagna</h3>
-            <img src="{{ asset('img/menu/lasagna.jpg') }}" alt="">
-        </div>
-        <div class="dish">
-            <h3>Hamburger</h3>
-            <img src="{{ asset('img/menu/burger.jpeg') }}" alt="">
-        </div>
-        <div class="dish">
-            <h3>Beef</h3>
-            <img src="{{ asset('img/menu/beef.jpg') }}" alt="">
-        </div>
+        @foreach ($dishes as $dish)
+        <a class="dish" href="/menu/{{ $dish->name }}">
+            <h3>{{ $dish->name }}</h3>
+            <img src="{{ \Storage::disk('s3')->url($dish->image) }}" alt="">
+        </a>
+        @endforeach
     </section>
     @include("incs.footer")
 @endsection

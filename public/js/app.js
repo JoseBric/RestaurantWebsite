@@ -13934,6 +13934,27 @@ if (page == "home") {
         var featured = $("#popular").offset().top;
         if (navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black");else navbar.removeClass("navbar-black");
     });
+    // let popular = document.querySelector("#popular")
+    // rows = {}
+    document.querySelectorAll(".dish img").forEach(function (el) {
+        console.log(el.width);
+        el.onload = function (e) {
+            var proportion = (el.clientWidth / el.clientHeight).toFixed(2);
+            el.parentNode.style.flex = proportion;
+        };
+        // const popular = dish.parentNode
+        // if(!rows[proportion]) rows[proportion] = []
+        // rows[proportion].push(el.parentElement)
+    });
+    // for(let row in rows) {
+    //     const noDot = row.replace("0.", "")
+    //     const numEls = rows[row].length
+
+    //     $(rows[row]).wrapAll(`<div id="row${noDot}"></div>`)
+    //     rows[row].forEach(dish=>{
+    //         dish.childNodes[0].style.cssText = `width: calc(100vw / ${numEls}); height:auto;`
+    //     })
+    // }
 } else if (page == "dish_create" || page == "dish_edit") {
     var checkTag = function checkTag() {
         tagDelete.click(function () {
@@ -13982,6 +14003,20 @@ if (page == "home") {
         }
     });
 } else if (page == "dashboard") {
+    document.querySelector("#featuredBox").addEventListener("click", function (e) {
+        el = e.target;
+        var featuredBoxes = document.querySelectorAll(".featuredBox");
+        if (el.checked) {
+            featuredBoxes.forEach(function (chBox) {
+                chBox.style.display = "inline-block";
+            });
+        } else {
+            featuredBoxes.forEach(function (chBox) {
+                chBox.style.display = "none";
+            });
+        }
+    });
+
     $(".deleteBtn").click(function (el) {
         var dish = el.target.closest(".dish");
         var id = dish.getAttribute("dish_id");

@@ -3,7 +3,7 @@
     <div class="card-body">
         <div class="card-header">
             <div class="card-title text-center text-capitalize">
-                <h2>{{ $dish->name }}</h2>
+                <h2>{{ $dish->name }}</h2> <input type="checkbox" name="featured" class="featuredBox">
             </div>
         </div>
         <br>

@@ -45,6 +45,27 @@ if(page == "home") {
         if(navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black")
         else navbar.removeClass("navbar-black")
     })
+    // let popular = document.querySelector("#popular")
+    // rows = {}
+    document.querySelectorAll(".dish img").forEach(el=>{
+        console.log(el.width)
+        el.onload = e=>{
+            const proportion = (el.clientWidth / el.clientHeight).toFixed(2)
+            el.parentNode.style.flex = proportion
+        }
+        // const popular = dish.parentNode
+        // if(!rows[proportion]) rows[proportion] = []
+        // rows[proportion].push(el.parentElement)
+    })
+    // for(let row in rows) {
+    //     const noDot = row.replace("0.", "")
+    //     const numEls = rows[row].length
+
+    //     $(rows[row]).wrapAll(`<div id="row${noDot}"></div>`)
+    //     rows[row].forEach(dish=>{
+    //         dish.childNodes[0].style.cssText = `width: calc(100vw / ${numEls}); height:auto;`
+    //     })
+    // }
 }
 
 else if(page == "dish_create" || page == "dish_edit") {
@@ -97,6 +118,20 @@ else if(page == "dish_create" || page == "dish_edit") {
 
 }
 else if(page == "dashboard") {
+    document.querySelector("#featuredBox").addEventListener("click", e=>{
+        el = e.target
+        const featuredBoxes = document.querySelectorAll(".featuredBox")
+        if(el.checked) {
+            featuredBoxes.forEach(chBox=>{
+                chBox.style.display = "inline-block"
+            })
+        } else {
+            featuredBoxes.forEach(chBox=>{
+                chBox.style.display = "none"
+            })
+        }
+    })
+
     $(".deleteBtn").click(el=>{
         const dish = el.target.closest(".dish")
         const id = dish.getAttribute("dish_id")

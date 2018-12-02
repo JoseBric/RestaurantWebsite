@@ -1,13 +1,16 @@
 <?php
 Route::get('/', "PagesController@home");
 Route::get('/menu', "PagesController@menu");
+Route::get('/menu/{category}/category', "PagesController@menu_category");
+Route::get('/menu/{category}', "PagesController@menu_single");
 Route::get('/about_us', "PagesController@about_us");
-Route::get('/schedules', "PagesController@schedule");
+Route::get('/schedules', "PagesController@locations");
 
 
 Route::resource("/dish", "DishesController");
+Route::put("/dish/{id}/addfeatured", "DishesController@addFeatured");
+Route::put("/dish/{id}/addfeatured", "DishesController@addFeatured");
 Route::resource("/dish/category", "CategoriesController")->middleware("auth");
-
 
 Route::get("/user/{user}", "UsersController@profile");
 Route::get("/user/{user}/settings", "UsersController@settings")->middleware("auth_me");
