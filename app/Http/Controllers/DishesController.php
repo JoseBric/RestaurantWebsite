@@ -108,4 +108,14 @@ class DishesController extends Controller
         $dish->categories()->detach();
         $dish->delete();
     }
+
+    public function featured(Dish $dish)
+    {
+        $dish->featured();
+    }
+
+    public function unfeatured(Dish $dish)
+    {
+        $dish->unfeatured();
+    }
 }

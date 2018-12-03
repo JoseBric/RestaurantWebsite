@@ -14003,19 +14003,6 @@ if (page == "home") {
         }
     });
 } else if (page == "dashboard") {
-    document.querySelector("#featuredBox").addEventListener("click", function (e) {
-        el = e.target;
-        var featuredBoxes = document.querySelectorAll(".featuredBox");
-        if (el.checked) {
-            featuredBoxes.forEach(function (chBox) {
-                chBox.style.display = "inline-block";
-            });
-        } else {
-            featuredBoxes.forEach(function (chBox) {
-                chBox.style.display = "none";
-            });
-        }
-    });
 
     $(".deleteBtn").click(function (el) {
         var dish = el.target.closest(".dish");
@@ -14036,6 +14023,37 @@ if (page == "home") {
             },
             error: function error(err) {
                 console.log(err);
+            }
+        });
+    });
+
+    var badge = document.querySelector("#featured-badge");
+    document.querySelectorAll(".featuredBox").forEach(function (val) {
+        var dish = val.closest(".card");
+
+        val.addEventListener("click", function (e) {
+            var xhr = new XMLHttpRequest();
+            var dish_id = val.getAttribute("dish_id");
+            if (e.target.checked) {
+                xhr.open("PUT", '/dish/' + dish_id + '/featured');
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        badge.innerHTML++;
+                        dish.classList.add("featured_dish");
+                    }
+                };
+                xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+                xhr.send();
+            } else {
+                xhr.open("PUT", '/dish/' + dish_id + '/unfeatured');
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        badge.innerHTML--;
+                        dish.classList.remove("featured_dish");
+                    }
+                };
+                xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+                xhr.send();
             }
         });
     });

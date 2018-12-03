@@ -6,10 +6,9 @@ Route::get('/menu/{category}', "PagesController@menu_single");
 Route::get('/about_us', "PagesController@about_us");
 Route::get('/schedules', "PagesController@locations");
 
-
 Route::resource("/dish", "DishesController");
-Route::put("/dish/{id}/addfeatured", "DishesController@addFeatured");
-Route::put("/dish/{id}/addfeatured", "DishesController@addFeatured");
+Route::put("/dish/{dish}/featured", "DishesController@featured");
+Route::put("/dish/{dish}/unfeatured", "DishesController@unfeatured");
 Route::resource("/dish/category", "CategoriesController")->middleware("auth");
 
 Route::get("/user/{user}", "UsersController@profile");

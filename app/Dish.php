@@ -15,4 +15,12 @@ class Dish extends Model
     public function categories(){
         return $this->belongsToMany(Category::class, "categories_dishes", "dish_id", "category_id");
     }
+    
+    public function featured(){
+        return $this->update(["featured" => true]);
+    }
+    
+    public function unfeatured(){
+        return $this->update(["featured" => false]);
+    }   
 }

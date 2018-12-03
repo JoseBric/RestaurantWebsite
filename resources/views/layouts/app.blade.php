@@ -27,10 +27,11 @@
                         
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <div id="nav-links">
-                                <a class="left navbar-brand" href="{{ url('/') }}">
-                                    <img id="logo" src="/img/logo.png" alt="">
-                                    
-                                </a>
+                                <div class="left">
+                                    <a class="navbar-brand" href="{{ url('/') }}">
+                                        <img id="logo" src="/img/logo.png" alt="">
+                                    </a>
+                                </div>
                                 <div class="centered">
                                     <ul class="navbar-nav">
                                         <li class="nav-item">

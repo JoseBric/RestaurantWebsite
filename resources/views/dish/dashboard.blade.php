@@ -19,14 +19,10 @@
                     @endforeach
                 @endif
             </div>
-            @if($featured)
             <div class="featured-dishes col-md-12 row mb-4">
                 <input type="checkbox" id="featuredBox">
-                @foreach ($featured as $dish)
-                <span class="badge badge-primary featured-badge">{{ $dish->name }}</span>
-                @endforeach
+                <label for="featuredBox">Select Featured <span id="featured-badge" class="badge badge-secondary featured-badge">{{ count($featured) }}</span></label>
             </div>
-            @endif
         </div>
         </div>
             <div class="images row">

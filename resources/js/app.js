@@ -118,19 +118,6 @@ else if(page == "dish_create" || page == "dish_edit") {
 
 }
 else if(page == "dashboard") {
-    document.querySelector("#featuredBox").addEventListener("click", e=>{
-        el = e.target
-        const featuredBoxes = document.querySelectorAll(".featuredBox")
-        if(el.checked) {
-            featuredBoxes.forEach(chBox=>{
-                chBox.style.display = "inline-block"
-            })
-        } else {
-            featuredBoxes.forEach(chBox=>{
-                chBox.style.display = "none"
-            })
-        }
-    })
 
     $(".deleteBtn").click(el=>{
         const dish = el.target.closest(".dish")
@@ -151,6 +138,37 @@ else if(page == "dashboard") {
             },
             error: function(err){
                 console.log(err)
+            }
+        })
+    })
+
+    const badge = document.querySelector("#featured-badge")
+    document.querySelectorAll(".featuredBox").forEach(val=>{
+        const dish = val.closest(".card")
+
+        val.addEventListener("click", e=>{
+            const xhr = new XMLHttpRequest()
+            const dish_id = val.getAttribute("dish_id")
+            if(e.target.checked) {
+                xhr.open("PUT", `/dish/${dish_id}/featured`)
+                xhr.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200) {
+                        badge.innerHTML++
+                        dish.classList.add("featured_dish")
+                    }
+                }
+                xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'))
+                xhr.send()
+            } else {
+                xhr.open("PUT", `/dish/${dish_id}/unfeatured`)
+                xhr.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200) {
+                        badge.innerHTML--
+                        dish.classList.remove("featured_dish")
+                    }
+                }
+                xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'))
+                xhr.send()
             }
         })
     })

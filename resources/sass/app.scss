@@ -17,6 +17,10 @@ html ::-webkit-scrollbar {
 }
 // Custom
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Pacifico', "cursive", 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   header {
@@ -60,14 +64,18 @@ body {
           }
           .left {
             grid-area: left;
-            #logo {
-              float: left;
-              height: 65px;
-              margin-left: 50px;
+            z-index: inherit;
+            a {
+              z-index: 3;
+              #logo {
+                float: left;
+                height: 65px;
+                margin-left: 50px;
+              }
             }
           }
           .centered {
-            justify-self: center;
+            justify-self:1center;
             grid-area: center;
             li:nth-child(odd){
               margin: 0 50px;
@@ -137,30 +145,7 @@ body#home {
     background-repeat: no-repeat;
     #navbar-wrapper {
       #navbar {
-        @include easeOut;
-        background: rgba(0, 0, 0, 0);
-        backface-visibility: hidden;
-        z-index: 1;
-        &::after {
-          position: absolute;
-          content: '';
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          // background-image: linear-gradient(to top, #ca5f5e, #d68584);
-          background-image: linear-gradient(to right, #000000 0%,#45484d 100%);
-          transition: opacity 0.5s ease-out;
-          z-index: 2;
-          opacity: 0;
-        }
-        &.navbar-black::after {
-          opacity: 1;
-        }
-        #nav-links a {
-          z-index: 3;
-          color: white;
-        }
+        background: rgba(#fff, 0);
       }
     }
     .landing {
@@ -205,6 +190,7 @@ body#home {
       img {
         height: auto;
         width: 100%;
+        border: 1px solid white;
       }
     }
   }
@@ -219,10 +205,6 @@ body#dashboard {
     margin: 5px 5px 0 0;
   }
 
-  .featuredBox {
-    display: none;
-  }
-
   .featured-badge {
     font-family: "Nunito";
     font-size: 17px;
@@ -231,6 +213,13 @@ body#dashboard {
     &:hover {
       background: darken($blue, 10);
       cursor: pointer;
+    }
+  }
+
+  .card {
+    &.featured_dish {
+      box-sizing: border-box;
+      border: #3490dc 2px solid;
     }
   }
 }

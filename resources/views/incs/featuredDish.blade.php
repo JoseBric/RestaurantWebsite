@@ -1,9 +1,9 @@
-<div class="card dish col-md-4" dish_id="{{ $dish->id }}">
+<div class="card dish col-md-4 featured_dish">
     <img src="{{ \Storage::disk("s3")->url($dish->image) }}" alt="" class="card-img-top mt-3" style="margin: auto; width: 90%">
     <div class="card-body">
         <div class="card-header">
             <div class="card-title text-center text-capitalize">
-                <h2>{{ $dish->name }}</h2> <input type="checkbox" checked name="featured" class="featuredBox">
+                <h2>{{ $dish->name }}</h2> <input dish_id="{{ $dish->id }}" type="checkbox" checked name="featured" class="featuredBox">
             </div>
         </div>
         <br>
