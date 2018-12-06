@@ -81,9 +81,14 @@ body {
             li:nth-child(odd){
               margin: 0 50px;
             }
-            li{
-              align-self: center;
-              display: flex;
+            a {
+              white-space:nowrap;
+            }
+          }
+
+          .right {
+            a {
+              white-space:nowrap;
             }
           }
           
@@ -136,7 +141,6 @@ body {
 body#home {
   background: url("/img/woodbg.jpeg");
   background-attachment: fixed;
-  // background-image: linear-gradient(to top, #ca5f5e, #d68584);
   color: #000;
   header {
     height: 100vh;
@@ -179,16 +183,12 @@ body#home {
     }
     .dish {
       display: inline-block;
-      border: 2px solid black;
+      filter: grayscale(70%);
+      @include easeOut;
       &:hover {
         text-decoration: none;
-        // outline: #fff 2px solid;
-        border: 2px solid lighten(#ccc, 10);
-      }
-      h3 {
-        padding: 1rem 2rem;
-        text-align: center;
-        color: white;
+        filter: grayscale(0);
+
       }
       img {
         height: auto;

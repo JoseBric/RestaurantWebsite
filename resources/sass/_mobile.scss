@@ -13,6 +13,37 @@
                margin-bottom: 10px;
            }
         }
+
+        nav#navbar {
+            div#navbarSupportedContent {
+                #nav-links {
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-areas: "none center right";
+                    grid-auto-flow: row;
+                    div.left {
+                        display: none;
+                    }
+                    div.centered {                        
+                        ul.navbar-nav {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr 1fr;
+                            grid-auto-flow: row;
+                            li {
+                                text-align: center;
+                            }
+                        }
+                    }
+                    div.right {
+        
+                    }
+                    .dropdown-menu{
+                        position: absolute;
+                        right: 0;
+                        left: auto;
+                    }
+                }
+            }
+        }
     }
     body#menu, body#menu_category {
         div.dishes-menu {

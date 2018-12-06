@@ -21,7 +21,7 @@
         <header>
             <div id="navbar-wrapper">
                 <nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-laravel">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         
@@ -57,7 +57,7 @@
                                                 {{ Auth::user()->name }} <span class="caret"></span>
                                             </a>
                                             
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
                                                 <a class="dropdown-item text-dark" href="/dish">
                                                     Dashboard
                                                 </a>
