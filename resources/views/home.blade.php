@@ -10,7 +10,6 @@
     <section id="popular">
         @foreach ($dishes as $dish)
         <a class="dish" href="/menu/{{ $dish->categories()->first()->category_name }}/category">
-            <h3>{{ $dish->name }}</h3>
             <img src="{{ \Storage::disk('s3')->url($dish->image) }}" alt="">
         </a>
         @endforeach

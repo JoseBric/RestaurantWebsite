@@ -13888,38 +13888,11 @@ module.exports = __webpack_require__(43);
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 __webpack_require__(13);
 
 window.Vue = __webpack_require__(36);
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
 Vue.component('example-component', __webpack_require__(39));
-
-// const files = require.context('./', true, /\.vue$/i)
-
-// files.keys().map(key => {
-//     return Vue.component(_.last(key.split('/')).split('.')[0], files(key))
-// })
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 var app = new Vue({
     el: '#app'
@@ -13928,33 +13901,21 @@ var app = new Vue({
 //Custom
 page = document.querySelector("body").id;
 if (page == "home") {
-    $(window).scroll(function () {
-        var navbar = $("#navbar");
-        var navbarPos = navbar.offset().top;
-        var featured = $("#popular").offset().top;
-        if (navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black");else navbar.removeClass("navbar-black");
+    var navbar = $("#navbar");
+    $(window).scroll(function (e) {
+        if ($(window).scrollTop() > 0) {
+            navbar.fadeOut();
+        } else {
+            navbar.fadeIn();
+        }
     });
-    // let popular = document.querySelector("#popular")
-    // rows = {}
+
     document.querySelectorAll(".dish img").forEach(function (el) {
-        console.log(el.width);
         el.onload = function (e) {
             var proportion = (el.clientWidth / el.clientHeight).toFixed(2);
             el.parentNode.style.flex = proportion;
         };
-        // const popular = dish.parentNode
-        // if(!rows[proportion]) rows[proportion] = []
-        // rows[proportion].push(el.parentElement)
     });
-    // for(let row in rows) {
-    //     const noDot = row.replace("0.", "")
-    //     const numEls = rows[row].length
-
-    //     $(rows[row]).wrapAll(`<div id="row${noDot}"></div>`)
-    //     rows[row].forEach(dish=>{
-    //         dish.childNodes[0].style.cssText = `width: calc(100vw / ${numEls}); height:auto;`
-    //     })
-    // }
 } else if (page == "dish_create" || page == "dish_edit") {
     var checkTag = function checkTag() {
         tagDelete.click(function () {
@@ -14057,6 +14018,89 @@ if (page == "home") {
             }
         });
     });
+} else if (page == "about_us") {
+    var h1 = $("h1");
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 0) {
+            h1.removeClass("fadeIn");
+            h1.addClass("fadeOut");
+        } else {
+            h1.removeClass("fadeOut");
+            h1.addClass("fadeIn");
+        }
+    });
+} else if (page == "locations") {
+    var selectState = function selectState() {
+        state.addEventListener("change", function (e) {
+            e.target.querySelectorAll("option").forEach(function (el) {
+                if (el.selected) {
+                    var state_id = el.getAttribute("state_id");
+                    fetch('/locations/' + state_id + '/state', {
+                        method: "POST",
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                    }).then(function (res) {
+                        return res.json();
+                    }).then(function (arr) {
+                        city.style.visibility = "visible";
+                        arr.forEach(function (json) {
+                            city.innerHTML += '\n                                <option value="' + json.name + '" city_id="' + json.id + '">' + json.name + '</option>\n                                ';
+                        });
+                        selectCity();
+                    });
+                }
+            });
+        });
+    };
+
+    var selectCity = function selectCity() {
+        city.addEventListener("change", function (e) {
+            e.target.querySelectorAll("option").forEach(function (el) {
+                if (el.selected) {
+                    var city_id = el.getAttribute("city_id");
+                    fetch('/locations/' + city_id + '/city', {
+                        method: "POST",
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                    }).then(function (res) {
+                        return res.json();
+                    }).then(function (arr) {
+                        restaurant.style.visibility = "visible";
+                        arr.forEach(function (json) {
+                            restaurant.innerHTML += '\n                                <option value="' + json.name + '" lat="' + json.latitude + '" lng="' + json.longitude + '" restaurant_id="' + json.id + '">' + json.street + ' #' + json.ext_num + ' - Zip Code: ' + json.zip_code + '</option>\n                                ';
+                        });
+                        selectRestaurant();
+                    });
+                }
+            });
+        });
+    };
+
+    var selectRestaurant = function selectRestaurant() {
+        restaurant.addEventListener("change", function (e) {
+            e.target.querySelectorAll("option").forEach(function (el) {
+                if (el.selected) {
+                    var lat = parseFloat(el.getAttribute("lat"));
+                    var lng = parseFloat(el.getAttribute("lng"));
+                    var latLng = { lat: lat, lng: lng
+                        // const map = new google.maps.Map(document.getElementById('map'), {
+                        //     center: latLng,
+                        //     zoom: 15
+                        // })
+                        // new google.maps.Marker({
+                        //     position: latLng,
+                        //     map: map,
+                        //     title: "Restaurant"
+                        // })
+                    };
+                }
+            });
+        });
+    };
+
+    var map = void 0;
+    var state = document.querySelector("#state");
+    var city = document.querySelector("#city");
+    var restaurant = document.querySelector("#restaurant");
+    selectState();
 }
 
 /***/ }),

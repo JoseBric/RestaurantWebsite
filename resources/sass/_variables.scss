@@ -19,6 +19,11 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
+$screenSize1: 500px;
+$screenSize2: 768px;
+$screenSize3: 1170px;
+$screenHeight1: 768px;
+
 @mixin easeOut {
     transition: 0.5s ease-out all;
 }

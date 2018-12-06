@@ -1,4 +1,4 @@
-<div class="card dish col-md-4 featured_dish">
+<div dish_id="{{ $dish->id }}" class="card dish col-md-4 featured_dish">
     <img src="{{ \Storage::disk("s3")->url($dish->image) }}" alt="" class="card-img-top mt-3" style="margin: auto; width: 90%">
     <div class="card-body">
         <div class="card-header">

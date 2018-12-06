@@ -1,0 +1,71 @@
+@mixin screenSm {
+    
+}
+@mixin screenMd {
+    body {
+        footer {
+           h4 {
+               font-size: 25px;
+               margin-bottom: 20px;
+           } 
+           a {
+               font-size: 15px;
+               margin-bottom: 10px;
+           }
+        }
+    }
+    body#menu, body#menu_category {
+        div.dishes-menu {
+            grid-template-columns: 1fr;
+        }
+    }
+    body#home {
+        #popular {
+            display: none;
+        }
+    }
+
+}
+@mixin screenLg {
+    body#menu, body#menu_category {
+        div.dishes-menu {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    body#locations {
+        section.restaurant {
+            div#map {
+                background: green;
+            }
+        }
+    }
+}
+@mixin screenXl {
+
+}
+
+@mixin screenLarge {
+    body#locations {
+        section.restaurant {
+            div.map {
+                height: 475px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: #{$screenSize1}) {
+    @include screenSm;
+}
+@media screen and (min-width:#{$screenSize1 + 1}) and (max-width: #{$screenSize2}) {
+    @include screenMd;
+}
+@media screen and (min-width:#{$screenSize2 + 1}) and (max-width: #{$screenSize3}) {
+    @include screenLg;
+}
+@media screen and (min-width:#{$screenSize3 + 1}) {
+    @include screenXl;
+}
+@media screen and (min-height: #{$screenHeight1}) {
+    @include screenLarge;
+}

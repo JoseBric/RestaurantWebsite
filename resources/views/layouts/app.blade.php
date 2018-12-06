@@ -41,7 +41,7 @@
                                             <a href="/about_us" class="nav-link">About Us</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="/schedule" class="nav-link">Locations</a>
+                                            <a href="/locations" class="nav-link">Locations</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -63,6 +63,9 @@
                                                 </a>
                                                 <a class="dropdown-item text-dark" href="/user/{{ Auth::user()->id }}/">
                                                     Profile
+                                                </a>
+                                                <a class="dropdown-item text-dark" href="/locations/admin">
+                                                    Add Locations
                                                 </a>
                                                 <a class="dropdown-item text-dark" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();

@@ -10471,7 +10471,14 @@ a.text-dark:focus {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-html ::-webkit-scrollbar {
+html {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html::-webkit-scrollbar {
   display: none;
 }
 
@@ -10550,7 +10557,7 @@ body header #navbar-wrapper #navbar #nav-links .left a #logo {
 }
 
 body header #navbar-wrapper #navbar #nav-links .centered {
-  justify-self: 1center;
+  justify-self: center;
   grid-area: center;
 }
 
@@ -10684,11 +10691,12 @@ body#home #popular h2 {
 
 body#home #popular .dish {
   display: inline-block;
+  border: 2px solid black;
 }
 
 body#home #popular .dish:hover {
   text-decoration: none;
-  outline: #fff 1px solid;
+  border: 2px solid #e6e5e5;
 }
 
 body#home #popular .dish h3 {
@@ -10700,7 +10708,6 @@ body#home #popular .dish h3 {
 body#home #popular .dish img {
   height: auto;
   width: 100%;
-  border: 1px solid white;
 }
 
 body#dashboard h1,
@@ -10874,30 +10881,25 @@ body#menu_category .dishes-menu {
           align-items: center;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
+  grid-row-gap: 50px;
 }
 
 body#menu_category .dishes-menu .dish {
   width: 100%;
   height: 300px;
-  margin-bottom: 50px;
+  display: block;
 }
 
 body#menu_category .dishes-menu .dish h3 {
-  position: relative;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
   text-align: center;
   background: -webkit-gradient(linear, left bottom, left top, from(#ca5f5e), to(#d68584));
   background: linear-gradient(to top, #ca5f5e, #d68584);
   padding: 10px 0;
   margin: 0;
-  z-index: 0;
 }
 
 body#menu_category .dishes-menu .dish h3 span {
   color: #fff;
-  z-index: 1;
-  overflow: hidden;
 }
 
 body#menu_category .dishes-menu .dish .img {
@@ -10915,6 +10917,7 @@ body#menu_category .dishes-menu .dish .ingredients {
   color: white;
   text-align: center;
   padding: 1rem 2rem;
+  display: block;
 }
 
 body#about_us section.about_us {
@@ -10944,5 +10947,124 @@ body#about_us section.about_us h1 {
 
 body#about_us #navbar-wrapper {
   height: 0;
+}
+
+body#about_us h1 {
+  -webkit-transition: 0.5s ease-out all;
+  transition: 0.5s ease-out all;
+}
+
+body#about_us h1.fadeOut {
+  opacity: 0;
+}
+
+body#about_us h1.fadeIn {
+  opacity: 1;
+}
+
+body#about_us section.mvv {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: -webkit-gradient(linear, left bottom, left top, from(#000000), to(#45484d));
+  background: linear-gradient(to top, #000000 0%, #45484d 100%);
+}
+
+body#about_us section.mvv .card-mvv {
+  text-align: center;
+  padding: 20px 50px;
+  display: grid;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  border-top: #fff solid 5px;
+}
+
+body#about_us section.mvv .card-mvv h2 {
+  margin-bottom: 20px;
+}
+
+body#about_us section.mvv .card-mvv p {
+  font-size: 15px;
+}
+
+body#locations #main {
+  background: -webkit-gradient(linear, left bottom, left top, from(#000000), to(#45484d));
+  background: linear-gradient(to top, #000000 0%, #45484d 100%);
+  font-family: "Nunito";
+}
+
+body#locations #navbar-wrapper {
+  height: 0;
+}
+
+body#locations .restaurant {
+  padding: 100px 0;
+  background: url("/img/restaurant.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+body#locations .map {
+  margin: auto;
+  height: 300px;
+  width: 100%;
+  background: #d9d9d9;
+}
+
+body#locations #city,
+body#locations #restaurant {
+  visibility: hidden;
+}
+
+body#locations option,
+body#locations select {
+  text-transform: capitalize;
+}
+
+body#locations select {
+  margin: 1rem auto;
+  width: 100%;
+}
+
+@media screen and (min-width: 501px) and (max-width: 768px) {
+  body footer h4 {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  body footer a {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  body#menu div.dishes-menu,
+  body#menu_category div.dishes-menu {
+    grid-template-columns: 1fr;
+  }
+
+  body#home #popular {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1170px) {
+  body#menu div.dishes-menu,
+  body#menu_category div.dishes-menu {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  body#locations section.restaurant div#map {
+    background: green;
+  }
+}
+
+@media screen and (min-height: 768px) {
+  body#locations section.restaurant div.map {
+    height: 475px;
+  }
 }
 

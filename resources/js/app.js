@@ -1,35 +1,8 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-// const files = require.context('./', true, /\.vue$/i)
-
-// files.keys().map(key => {
-//     return Vue.component(_.last(key.split('/')).split('.')[0], files(key))
-// })
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 const app = new Vue({
     el: '#app'
@@ -38,34 +11,24 @@ const app = new Vue({
 //Custom
 page = document.querySelector("body").id
 if(page == "home") {
-    $(window).scroll(function(){
-        const navbar = $("#navbar")
-        const navbarPos = navbar.offset().top
-        const featured = $("#popular").offset().top
-        if(navbarPos >= featured - navbar.height()) navbar.addClass("navbar-black")
-        else navbar.removeClass("navbar-black")
+    const navbar = $("#navbar")
+    $(window).scroll(function(e){
+        if($(window).scrollTop() > 0) {
+            navbar.fadeOut()
+        } 
+        else {
+            navbar.fadeIn()
+        }
     })
-    // let popular = document.querySelector("#popular")
-    // rows = {}
+
+
     document.querySelectorAll(".dish img").forEach(el=>{
-        console.log(el.width)
         el.onload = e=>{
             const proportion = (el.clientWidth / el.clientHeight).toFixed(2)
             el.parentNode.style.flex = proportion
         }
-        // const popular = dish.parentNode
-        // if(!rows[proportion]) rows[proportion] = []
-        // rows[proportion].push(el.parentElement)
     })
-    // for(let row in rows) {
-    //     const noDot = row.replace("0.", "")
-    //     const numEls = rows[row].length
 
-    //     $(rows[row]).wrapAll(`<div id="row${noDot}"></div>`)
-    //     rows[row].forEach(dish=>{
-    //         dish.childNodes[0].style.cssText = `width: calc(100vw / ${numEls}); height:auto;`
-    //     })
-    // }
 }
 
 else if(page == "dish_create" || page == "dish_edit") {
@@ -174,3 +137,91 @@ else if(page == "dashboard") {
     })
 }
 
+else if(page == "about_us") {
+    const h1 = $("h1")
+    $(window).scroll(function(){
+        if($(window).scrollTop() > 0) {
+            h1.removeClass("fadeIn")
+            h1.addClass("fadeOut")
+        } 
+        else {
+            h1.removeClass("fadeOut")
+            h1.addClass("fadeIn")
+        }
+    })
+}
+else if(page == "locations") {
+    let map;
+    const state = document.querySelector("#state")
+    const city = document.querySelector("#city")
+    const restaurant = document.querySelector("#restaurant")
+    selectState()
+    function selectState() {
+        state.addEventListener("change", e => {
+            e.target.querySelectorAll("option").forEach(el => {
+                if(el.selected) {
+                    const state_id = el.getAttribute("state_id")
+                    fetch(`/locations/${state_id}/state`, {
+                        method: "POST",
+                        headers: {'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}
+                    }).then(res=>res.json())
+                        .then(arr=>{
+                            city.style.visibility = "visible"
+                            arr.forEach(json=>{
+                                city.innerHTML += 
+                                `
+                                <option value="${json.name}" city_id="${json.id}">${json.name}</option>
+                                `
+                            })
+                            selectCity()
+                        })
+                }
+            })
+        })
+    }
+
+    function selectCity() {
+        city.addEventListener("change", e => {
+            e.target.querySelectorAll("option").forEach(el => {
+                if(el.selected) {
+                    const city_id = el.getAttribute("city_id")
+                    fetch(`/locations/${city_id}/city`, {
+                        method: "POST",
+                        headers: {'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}
+                    }).then(res=>res.json())
+                        .then(arr=>{
+                            restaurant.style.visibility = "visible"
+                            arr.forEach(json=>{
+                                restaurant.innerHTML += 
+                                `
+                                <option value="${json.name}" lat="${json.latitude}" lng="${json.longitude}" restaurant_id="${json.id}">${json.street} #${json.ext_num} - Zip Code: ${json.zip_code}</option>
+                                `
+                            })
+                            selectRestaurant()
+                        })
+                }
+            })
+        })
+    }
+
+    function selectRestaurant() {
+        restaurant.addEventListener("change", e => {
+            e.target.querySelectorAll("option").forEach(el => {
+                if(el.selected) {
+                    const lat = parseFloat(el.getAttribute("lat"))
+                    const lng = parseFloat(el.getAttribute("lng"))
+                    const latLng = {lat: lat, lng: lng}
+                    // const map = new google.maps.Map(document.getElementById('map'), {
+                    //     center: latLng,
+                    //     zoom: 15
+                    // })
+                    // new google.maps.Marker({
+                    //     position: latLng,
+                    //     map: map,
+                    //     title: "Restaurant"
+                    // })
+                }
+            })
+        })
+    }
+}

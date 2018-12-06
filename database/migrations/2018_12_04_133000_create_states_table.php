@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFeaturedColumnToDishesTable extends Migration
+class CreateStatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddFeaturedColumnToDishesTable extends Migration
      */
     public function up()
     {
-        Schema::table('dishes', function (Blueprint $table) {
-            $table->boolean("featured")->nullable();
+        Schema::create('states', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string("name");
         });
     }
 
@@ -25,8 +26,6 @@ class AddFeaturedColumnToDishesTable extends Migration
      */
     public function down()
     {
-        Schema::table('dishes', function (Blueprint $table) {
-            $table->dropColumn("featured");
-        });
+        Schema::dropIfExists('states');
     }
 }
