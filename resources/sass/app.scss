@@ -29,8 +29,9 @@ body {
       height: 100px;
       width: 100%;
       #navbar {
+
         // background-image: linear-gradient(to top, #ca5f5e, #d68584);
-        background-image: linear-gradient(to right, #000000 0%,#45484d 100%);
+        background-image: $black-bg;
         z-index: 1;
         padding: 0;
         position: fixed; 
@@ -109,7 +110,7 @@ body {
   footer {
     clear: both;
     background: #7d7e7d;
-    background: linear-gradient(to right, #000000 0%,#45484d 100%);
+    background: $black-bg;
     padding: 2rem 4rem;
     display: grid;
     align-items: center;
@@ -141,6 +142,7 @@ body {
 body#home {
   background: url("/img/woodbg.jpeg");
   background-attachment: fixed;
+  background-position: center;
   color: #000;
   header {
     height: 100vh;
@@ -172,7 +174,7 @@ body#home {
   }
 
   #popular {
-    background: linear-gradient(to right, #000000 0%,#45484d 100%);
+    background: $black-bg;
     display: flex;
     padding: 0;
     width: 100vw;
@@ -282,7 +284,7 @@ body#menu {
         position: relative;
         backface-visibility: hidden;
         text-align: center;
-        background: linear-gradient(to right, #000000 0%,#45484d 100%);
+        background: $black-bg;
         padding: 10px 0;
         margin: 0;
         z-index: 0;
@@ -330,10 +332,10 @@ body#menu_category {
     align-items: center;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
-    grid-row-gap: 50px;
+    // grid-row-gap: 100px;
     .dish {
+      border: 1px solid #000;
       width: 100%;
-      height: 300px;
       display: block;
       h3 {
         text-align: center;
@@ -347,13 +349,13 @@ body#menu_category {
       .img {
         margin: 0;
         width: 100%;
-        height: 100%;
+        height: 300px;
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
       }
       .ingredients {
-        background: linear-gradient(to right, #000000 0%,#45484d 100%);
+        background: $black-bg;
         color: white;
         text-align: center;
         padding: 1rem 2rem;
@@ -370,6 +372,7 @@ body#about_us {
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    background-position: center;
     display: grid;
     justify-items: center;
     align-items: center;
@@ -400,7 +403,7 @@ body#about_us {
     }
   }
 
-  section.mvv {
+  .mvv {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     background: linear-gradient(to top,#000000 0%,#45484d 100%);

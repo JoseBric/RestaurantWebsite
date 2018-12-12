@@ -21,11 +21,12 @@
         <header>
             <div id="navbar-wrapper">
                 <nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-laravel">
-                    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="navbar-collapse" id="navbarSupportedContent">
+                            <div class="hamburgerButton">
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                            </div>
                             <div id="nav-links">
                                 <div class="left">
                                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -52,12 +53,12 @@
                                             <a class="nav-link" href="{{ route('login') }}">Admin</a>
                                         </li>
                                         @else
-                                        <li class="nav-item dropdown">
+                                        <li class="nav-item dropdown dropdown">
                                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                 {{ Auth::user()->name }} <span class="caret"></span>
                                             </a>
                                             
-                                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                                 <a class="dropdown-item text-dark" href="/dish">
                                                     Dashboard
                                                 </a>

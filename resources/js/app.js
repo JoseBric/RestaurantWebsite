@@ -9,17 +9,38 @@ const app = new Vue({
 });
 
 //Custom
+
+//global
+const navLinks = document.querySelector("#nav-links")
+document.querySelector(".hamburgerButton").addEventListener("click", e=>{
+    const el = e.target
+    if(el.classList.contains("show")) {
+        el.classList.remove("show")
+        navLinks.classList.remove("show")
+    } else {
+        el.classList.add("show")
+        navLinks.classList.add("show")
+    }
+})
+
 page = document.querySelector("body").id
+
 if(page == "home") {
     const navbar = $("#navbar")
     $(window).scroll(function(e){
-        if($(window).scrollTop() > 0) {
-            navbar.fadeOut()
-        } 
-        else {
+        
+        if(window.innerWidth >= 768) {
+            if($(window).scrollTop() > 0) {
+                navbar.fadeOut()
+            } 
+            else {
+                navbar.fadeIn()
+            }
+        } else {
             navbar.fadeIn()
         }
     })
+    
 
 
     document.querySelectorAll(".dish img").forEach(el=>{

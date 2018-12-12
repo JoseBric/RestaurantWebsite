@@ -10629,6 +10629,7 @@ body p {
 body#home {
   background: url("/img/woodbg.jpeg");
   background-attachment: fixed;
+  background-position: center;
   color: #000;
 }
 
@@ -10879,12 +10880,11 @@ body#menu_category .dishes-menu {
           align-items: center;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
-  grid-row-gap: 50px;
 }
 
 body#menu_category .dishes-menu .dish {
+  border: 1px solid #000;
   width: 100%;
-  height: 300px;
   display: block;
 }
 
@@ -10903,7 +10903,7 @@ body#menu_category .dishes-menu .dish h3 span {
 body#menu_category .dishes-menu .dish .img {
   margin: 0;
   width: 100%;
-  height: 100%;
+  height: 300px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -10924,6 +10924,7 @@ body#about_us section.about_us {
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  background-position: center;
   display: grid;
   justify-items: center;
   -webkit-box-align: center;
@@ -10960,14 +10961,14 @@ body#about_us h1.fadeIn {
   opacity: 1;
 }
 
-body#about_us section.mvv {
+body#about_us .mvv {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   background: -webkit-gradient(linear, left bottom, left top, from(#000000), to(#45484d));
   background: linear-gradient(to top, #000000 0%, #45484d 100%);
 }
 
-body#about_us section.mvv .card-mvv {
+body#about_us .mvv .card-mvv {
   text-align: center;
   padding: 20px 50px;
   display: grid;
@@ -10979,11 +10980,11 @@ body#about_us section.mvv .card-mvv {
   border-top: #fff solid 5px;
 }
 
-body#about_us section.mvv .card-mvv h2 {
+body#about_us .mvv .card-mvv h2 {
   margin-bottom: 20px;
 }
 
-body#about_us section.mvv .card-mvv p {
+body#about_us .mvv .card-mvv p {
   font-size: 15px;
 }
 
@@ -11028,7 +11029,105 @@ body#locations select {
   width: 100%;
 }
 
-@media screen and (min-width: 501px) and (max-width: 768px) {
+@media screen and (max-width: 500px) {
+  body#home section.landing img {
+    width: 150px;
+    height: auto;
+  }
+
+  body header nav#navbar div.hamburgerButton {
+    -webkit-transition: 0.5s ease-out all;
+    transition: 0.5s ease-out all;
+    z-index: 100;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    cursor: pointer;
+  }
+
+  body header nav#navbar div.hamburgerButton .line {
+    height: 3px;
+    width: 100%;
+    background: white;
+  }
+
+  body header nav#navbar div.hamburgerButton .line:nth-child(odd) {
+    margin: 5px 0;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links {
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: translateX(-50vw);
+            transform: translateX(-50vw);
+    z-index: 50;
+    display: grid;
+    width: 50vw;
+    height: 100vh;
+    background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#45484d));
+    background: linear-gradient(to bottom, #000000 0%, #45484d 100%);
+    grid-template-columns: 1fr;
+    grid-auto-flow: column;
+    justify-items: center;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "left" "center" "right";
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: start;
+    -webkit-transition: 0.5s ease-out all;
+    transition: 0.5s ease-out all;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links .left {
+    -ms-flex-item-align: end;
+        align-self: end;
+    clear: both;
+    justify-self: center;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links .left a img#logo {
+    margin-left: 0;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links .centered {
+    -ms-flex-item-align: center;
+        align-self: center;
+    clear: both;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links .right {
+    -ms-flex-item-align: start;
+        align-self: start;
+    clear: both;
+    padding-left: 30px;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links div.centered ul.navbar-nav {
+    margin-right: 25px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    justify-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links.show {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links.show li a {
+    font-size: 15px;
+    color: white;
+  }
+
   body footer h4 {
     font-size: 25px;
     margin-bottom: 20px;
@@ -11039,30 +11138,162 @@ body#locations select {
     margin-bottom: 10px;
   }
 
-  body nav#navbar div#navbarSupportedContent #nav-links {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "none center right";
-    grid-auto-flow: row;
+  body#menu div.dishes-menu,
+  body#menu_category div.dishes-menu {
+    grid-template-columns: 1fr;
   }
 
-  body nav#navbar div#navbarSupportedContent #nav-links div.left {
+  body#home #popular {
     display: none;
   }
 
-  body nav#navbar div#navbarSupportedContent #nav-links div.centered ul.navbar-nav {
+  body#home header .landing h1 {
+    z-index: 0;
+  }
+
+  body#menu div.dishes-menu a.dish div.img {
+    -webkit-filter: grayscale(0);
+    filter: gray;
+  }
+
+  body#about_us {
+    background-position: center;
+  }
+
+  body#about_us section.about_us h1 {
+    font-size: 3rem;
+  }
+
+  body#about_us .mvv {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-flow: row;
+    grid-template-columns: 1fr;
   }
 
-  body nav#navbar div#navbarSupportedContent #nav-links div.centered ul.navbar-nav li {
-    text-align: center;
+  body#about_us .mvv div.card-mvv {
+    padding: 10px 15px;
   }
 
-  body nav#navbar div#navbarSupportedContent #nav-links .dropdown-menu {
+  body#menu div.dishes-menu a.dish div.img {
+    -webkit-filter: grayscale(0);
+    filter: gray;
+  }
+
+  body#home div#app header section.landing img {
+    height: 150px;
+  }
+
+  body#home div#app header section.landing h1 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 768px) {
+  body#home section.landing img {
+    width: 150px;
+    height: auto;
+  }
+
+  body header nav#navbar div.hamburgerButton {
+    -webkit-transition: 0.5s ease-out all;
+    transition: 0.5s ease-out all;
+    z-index: 100;
     position: absolute;
-    right: 0;
-    left: auto;
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    cursor: pointer;
+  }
+
+  body header nav#navbar div.hamburgerButton .line {
+    height: 3px;
+    width: 100%;
+    background: white;
+  }
+
+  body header nav#navbar div.hamburgerButton .line:nth-child(odd) {
+    margin: 5px 0;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links {
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: translateX(-50vw);
+            transform: translateX(-50vw);
+    z-index: 50;
+    display: grid;
+    width: 50vw;
+    height: 100vh;
+    background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#45484d));
+    background: linear-gradient(to bottom, #000000 0%, #45484d 100%);
+    grid-template-columns: 1fr;
+    grid-auto-flow: column;
+    justify-items: center;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "left" "center" "right";
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: start;
+    -webkit-transition: 0.5s ease-out all;
+    transition: 0.5s ease-out all;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links .left {
+    -ms-flex-item-align: end;
+        align-self: end;
+    clear: both;
+    justify-self: center;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links .left a img#logo {
+    margin-left: 0;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links .centered {
+    -ms-flex-item-align: center;
+        align-self: center;
+    clear: both;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links .right {
+    -ms-flex-item-align: start;
+        align-self: start;
+    clear: both;
+    padding-left: 30px;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links div.centered ul.navbar-nav {
+    margin-right: 25px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    justify-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links.show {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+
+  body header nav#navbar div#navbarSupportedContent.navbar-collapse div#nav-links.show li a {
+    font-size: 15px;
+    color: white;
+  }
+
+  body footer h4 {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  body footer a {
+    font-size: 15px;
+    margin-bottom: 10px;
   }
 
   body#menu div.dishes-menu,
@@ -11072,6 +11303,32 @@ body#locations select {
 
   body#home #popular {
     display: none;
+  }
+
+  body#home header .landing h1 {
+    z-index: 0;
+  }
+
+  body#menu div.dishes-menu a.dish div.img {
+    -webkit-filter: grayscale(0);
+    filter: gray;
+  }
+
+  body#about_us {
+    background-position: center;
+  }
+
+  body#about_us section.about_us h1 {
+    font-size: 3rem;
+  }
+
+  body#about_us .mvv {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  body#about_us .mvv div.card-mvv {
+    padding: 10px 15px;
   }
 }
 
