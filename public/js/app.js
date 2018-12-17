@@ -14100,17 +14100,16 @@ if (page == "home") {
                 if (el.selected) {
                     var lat = parseFloat(el.getAttribute("lat"));
                     var lng = parseFloat(el.getAttribute("lng"));
-                    var latLng = { lat: lat, lng: lng
-                        // const map = new google.maps.Map(document.getElementById('map'), {
-                        //     center: latLng,
-                        //     zoom: 15
-                        // })
-                        // new google.maps.Marker({
-                        //     position: latLng,
-                        //     map: map,
-                        //     title: "Restaurant"
-                        // })
-                    };
+                    var latLng = { lat: lat, lng: lng };
+                    var _map = new google.maps.Map(document.getElementById('map'), {
+                        center: latLng,
+                        zoom: 15
+                    });
+                    new google.maps.Marker({
+                        position: latLng,
+                        map: _map,
+                        title: "Restaurant"
+                    });
                 }
             });
         });

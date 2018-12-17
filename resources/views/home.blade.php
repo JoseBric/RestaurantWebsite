@@ -3,7 +3,7 @@
 @section('header')
 <section class="landing">
     <img src="/img/logo.png" alt="">
-    <h1>Resturant</h1>
+    <h1>Restaurant</h1>
 </section>
 @endsection
 @section('content')

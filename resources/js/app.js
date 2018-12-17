@@ -232,15 +232,15 @@ else if(page == "locations") {
                     const lat = parseFloat(el.getAttribute("lat"))
                     const lng = parseFloat(el.getAttribute("lng"))
                     const latLng = {lat: lat, lng: lng}
-                    // const map = new google.maps.Map(document.getElementById('map'), {
-                    //     center: latLng,
-                    //     zoom: 15
-                    // })
-                    // new google.maps.Marker({
-                    //     position: latLng,
-                    //     map: map,
-                    //     title: "Restaurant"
-                    // })
+                    const map = new google.maps.Map(document.getElementById('map'), {
+                        center: latLng,
+                        zoom: 15
+                     })
+                    new google.maps.Marker({
+                        position: latLng,
+                        map: map,
+                        title: "Restaurant"
+                    })
                 }
             })
         })
