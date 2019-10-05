@@ -22,4 +22,4 @@ The menu is ordered by categories created by the admin.
 ### Locations
 On this page you can select the closest restaurant to you. The admin can simply add more locations just by adding the address of the restaurant and then the client will be able to search it on the Locations page.
 
-## [Link to the website](https://project1.josebric.com)
+## [Link to the website](https://restaurant.josebric.info)
